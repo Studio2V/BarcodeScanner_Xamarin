@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BarcodeScanner.Views.AboutPage"
+             xmlns:vm="clr-namespace:BarcodeScanner.ViewModels"
+             Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout >
+        <StackLayout.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#0F2027"
+                              Offset="0.1" />
+                <GradientStop Color="#2C5364"
+                              Offset="1.0" />
+                </LinearGradientBrush>
+        </StackLayout.Background>
+        <Label TextType="Html" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  TextColor="White">
+            <![CDATA[
+                Charan , Software Developer , Enthusiast .<br> Thanks for using this app. <br> share feedback at 
+                <a href = "mailto: cherrygo123@duck.com">cherrygo123@duck.com</a>
+                ]]>
+        </Label>
+    </StackLayout>
+
+</ContentPage>

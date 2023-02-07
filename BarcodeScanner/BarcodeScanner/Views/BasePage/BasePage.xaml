@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BarcodeScanner.Views.BasePage.BasePage"
+             NavigationPage.HasNavigationBar="False"
+             x:Name="basePage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <LinearGradientBrush x:Key="LinearBackgrounds" StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#88f7f9"
+                          Offset="0.1" />
+                <GradientStop Color="#048fff"
+                          Offset="1.0" />
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="LinearBackgroundsHeader" StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#0F2027"
+                          Offset="0.1" />
+                <GradientStop Color="#2C5364"
+                          Offset="1.0" />
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="LinearBackgroundGrid" StartPoint="1,1" EndPoint="0,0">
+                <GradientStop Color="White"
+                          Offset="0.1" />
+                <GradientStop Color="White"
+                          Offset="1.0" />
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="ItemBackgroundGradient" StartPoint="1,1" EndPoint="0,0">
+                <GradientStop Color="White"
+                          Offset="0.1" />
+                <GradientStop Color="White"
+                          Offset="1.0" />
+            </LinearGradientBrush>
+            <Style TargetType="Button" x:Key="ButtonStyle">
+                <Setter Property="TextTransform" Value="None"/>
+                <Setter Property="BorderColor" Value="Transparent"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="Opacity" Value="0.9"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="Background" Value="{x:StaticResource LinearBackgrounds}"/>
+            </Style>
+            <Style TargetType="ListView" x:Key="ListviewStyle">
+                <Setter Property="SeparatorColor" Value="WhiteSmoke"/>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid Background="{x:StaticResource LinearBackgroundGrid}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Frame Grid.Row="0" Padding="0" Background="{x:StaticResource LinearBackgroundsHeader}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="White" Text="Universal BarCode Scanner"/>
+                    <Image Grid.Column="1" Source="about_developer.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="AboutDeveloper" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+            </Frame>
+            <!--<Label Grid.Row="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Hello"/>-->
+            <Frame Grid.Row="1" BackgroundColor="Transparent" Padding="0" Margin="6">
+                <ListView x:Name="ListViewItem" SelectionMode="None" SeparatorVisibility="None" HasUnevenRows="True" ItemsSource="{Binding ScanitemsList}" Style="{x:StaticResource ListviewStyle}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame Background="{x:StaticResource ItemBackgroundGradient}" Margin="4" Padding="0" BackgroundColor="Transparent" BorderColor="LightGray" CornerRadius="3">
+                                    <Grid Margin="4">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="6"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="36"/>
+                                        </Grid.ColumnDefinitions>
+                                        <BoxView Grid.RowSpan="2" Grid.Column="0" BackgroundColor="MidnightBlue"/>
+                                        <Label Grid.Column="1" FontAttributes="Bold" Grid.Row="0" Text="Barcode Info"/>
+                                        <StackLayout Grid.Row="1" Grid.Column="1">
+                                            <Label TextColor="MidnightBlue" Text="{Binding LinkText}"/>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label TextColor="Gray" Text="{Binding LinkType}" />
+                                                <Label TextColor="Gray" Text="{Binding Scantime}" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <Image Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" Source="copyClipboard.png" >
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="clipBoardImageClicked" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </Grid>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="linkNavigationClicked"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+            <Grid Grid.Row="2" Margin="4" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <!--<ColumnDefinition Width="*"/>-->
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Style="{x:StaticResource ButtonStyle}" Text="Scan" Clicked="scaned"/>
+                <!--<Button Grid.Column="1" Style="{x:StaticResource ButtonStyle}" Text="Scan History"/>-->
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
