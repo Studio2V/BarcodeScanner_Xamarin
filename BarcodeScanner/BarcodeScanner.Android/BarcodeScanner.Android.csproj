@@ -76,6 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="client_secret_102378178087-efhic8msat66aafeo40hg39g92f9n84r.apps.googleusercontent.com.json" />
     <None Include="deployment_cert.der" />
     <None Include="digitalAsset.json" />
     <None Include="Resources\AboutResources.txt" />
